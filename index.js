@@ -17,14 +17,25 @@
  */
 
 // Створюємо об'єкт Book
+var Book = {
+    title: `Загальна Книга`,
+    author: `Анонім`,
+    pages: 0,
+    read: function () {
+        return 'Ви читаєте ${title} від ${author}';
+    }
+};
 
 console.log("Завдання: 1 ==============================");
 
 // Виводимо в консоль Об'єкт: Book
-
+console.log(Book);
 // Виводимо в консоль прототип Об'єкту: Book
 
+console.log(Object.getPrototypeOf(Book));
+
 // Викликаємо функцію read об'єкту Book
+console.log(Book.read());
 
 // 2. Наслідування від базового об'єкту Book
 
@@ -38,15 +49,16 @@ console.log("Завдання: 1 ==============================");
  */
 
 // Створюємо об'єкт Novel, наслідуємо властивості і функції від об'єкта Book
-
+var Novel = Object.create(Book) 
+   Novel.genre = `Новела`
 // Додаємо властивість genre
 
 console.log("Завдання: 2 ==============================");
 
 // Виводимо в консоль Об'єкт: Novel
-
+console.log(Novel)
 // Виводимо в консоль прототип Об'єкту: Novel
-
+console.log(Object.getPrototypeOf(Novel));
 // 3. Створення нового об'єкту та зміна його прототипу
 
 /*
@@ -61,14 +73,20 @@ console.log("Завдання: 2 ==============================");
  */
 
 // Створюємо об'єкт Biography
-
+var Biography = {
+    title: `Загальна Біографія`,
+    author: `Біограф`,
+    pages: `200 `
+}
 // Змінемо прототип об'єкта Biography на Novel
+
+Object.setPrototypeOf(Biography, Novel);
 
 console.log("Завдання: 3 ==============================");
 // Виводимо в консоль Об'єкт: Biography
-
+console.log(Biography)
 // Перевіримо чи являється Novel прототипом Biography та виведемо в консоль
-
+console.log(Novel.isPrototypeOf(Biography));
 // 4. Інкапсуляція властивості та додання властивості
 /*
  * Об'єкт: ScienceBook
@@ -79,6 +97,8 @@ console.log("Завдання: 3 ==============================");
 // Створюємо ScienceBook, наслідуємо властивості і функції від об'єкта Book
 
 // Додаємо властивість 'info' за допомогою Object.defineProperty
+
+
 // Зробимо щоб 'info' не можно було видалити або змінити, перевіримо і спробуємо присвоїти ій будь яке значення (це потрібно робити ззовні defineProperty),
 // Отримаємо помилку Cannot assign to read only property 'info' of object '#<Object>'
 
@@ -138,13 +158,21 @@ console.log("Завдання: 5 ==============================");
  */
 
 // Створюємо об'єкт Media
-
+var Media = {
+format: `Загальний Формат`,
+length: `0`,
+play: function (format, length) {
+   return `Зараз відтворюється медіа у форматі ${format}: з тривалістю ${length} секунд`;
+}
+}
 /*
  * Об'єкт: Song
  * Властивості та функції наслідуються від об'єкта Media
  * Додаткові властивості: artist, title
  */
-
+var Song = Object.create(Media);
+Song.artist = `Загальний Виконавець`,
+Song.title = `Загальна Пісня`
 // Створюємо об'єкт Song, наслідуємо властивості і функції від об'єкта Media
 
 // Встановлюємо додаткові властивості
@@ -155,3 +183,6 @@ console.log("Завдання: 5 ==============================");
 
 console.log("Завдання: 6 ==============================");
 // Викликаємо функцію play об'єкту Song
+console.log(Song.play());
+
+   
